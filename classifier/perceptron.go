@@ -15,9 +15,9 @@ type Perceptron struct {
 }
 
 func (p *Perceptron) Update(label float64, vec array.Array) {
-	pred := math.Sin(p.W.Dot(vec))
+	pred := p.W.Dot(vec)
 	if pred*label <= 0 {
-		grad := vec.ConsFactor(p.Eta * pred)
+		grad := vec.ConsFactor(p.Eta * label * pred)
 		p.W.Add(grad)
 	}
 }

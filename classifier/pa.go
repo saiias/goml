@@ -24,7 +24,7 @@ func (p *PA) pa1(l float64, vec *array.Array) float64 {
 }
 
 func (p *PA) Update(label float64, vec array.Array) {
-	pred := math.Sin(p.W.Dot(vec))
+	pred := p.W.Dot(vec)
 	if pred*label <= 0 {
 		l := math.Max(0, 1-label*p.W.Dot(vec))
 		tau := 0.0
