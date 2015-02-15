@@ -47,7 +47,7 @@ func (a *Arow) Update(label float64, vec array.Array) {
 		}
 
 		a.W[i] += alpha * a.Confidence[i] * value * label
-		a.Confidence[i] -= 1.0 / ((1.0 / a.Confidence[i]) + value*value/a.R)
+		a.Confidence[i] = 1.0 / ((1.0 / a.Confidence[i]) + value*value/a.R)
 	}
 }
 
