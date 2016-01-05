@@ -1,14 +1,10 @@
-package classifier
-
-import (
-	"github.com/saiias/goml/array"
-)
+package goml
 
 type Arow struct {
-	W          array.Array
-	Label      array.Array
-	Matrix     []array.Array
-	Confidence array.Array
+	W          Array
+	Label      Array
+	Matrix     []Array
+	Confidence Array
 	R          float64
 	Iters      int
 }
@@ -21,7 +17,7 @@ func (a *Arow) Train() {
 	}
 }
 
-func (a *Arow) Update(label float64, vec array.Array) {
+func (a *Arow) Update(label float64, vec Array) {
 	margin := a.W.Dot(vec)
 
 	if margin*label >= 1.0 {
@@ -51,7 +47,7 @@ func (a *Arow) Update(label float64, vec array.Array) {
 	}
 }
 
-func (a *Arow) Predict(test *[]array.Array) *[]float64 {
+func (a *Arow) Predict(test *[]Array) *[]float64 {
 	ret := make([]float64, 0)
 	for _, b := range *test {
 		ret = append(ret, a.W.Dot(b))

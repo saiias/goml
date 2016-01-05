@@ -1,10 +1,6 @@
-package utils
+package goml
 
-import (
-	"github.com/saiias/goml/array"
-)
-
-func Accuracy(label *array.Array, pred *[]float64) float64 {
+func Accuracy(label *Array, pred *[]float64) float64 {
 	count := len(*label)
 	p := 0.0
 	for i, l := range *label {

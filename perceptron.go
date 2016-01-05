@@ -1,20 +1,18 @@
-package classifier
+package goml
 
 import (
 	"math"
-
-	"github.com/saiias/goml/array"
 )
 
 type Perceptron struct {
-	W      array.Array
-	Label  array.Array
-	Matrix []array.Array
+	W      Array
+	Label  Array
+	Matrix []Array
 	Eta    float64
 	Iters  int
 }
 
-func (p *Perceptron) Update(label float64, vec array.Array) {
+func (p *Perceptron) Update(label float64, vec Array) {
 	pred := p.W.Dot(vec)
 	if pred*label <= 0 {
 		grad := vec.ConsFactor(p.Eta * label * pred)
@@ -30,7 +28,7 @@ func (p *Perceptron) Train() {
 	}
 }
 
-func (p *Perceptron) Predict(test *[]array.Array) *[]float64 {
+func (p *Perceptron) Predict(test *[]Array) *[]float64 {
 	ret := make([]float64, 0)
 	for _, a := range *test {
 		ret = append(ret, math.Sin(p.W.Dot(a)))

@@ -1,4 +1,4 @@
-package utils
+package goml
 
 import (
 	"bufio"
@@ -6,14 +6,12 @@ import (
 	"os"
 	"strconv"
 	"strings"
-
-	"github.com/saiias/goml/array"
 )
 
-func Svmlight(p string) (array.Array, []array.Array) {
+func Svmlight(p string) (Array, []Array) {
 
-	label := make(array.Array, 0)
-	matrix := make([]array.Array, 0)
+	label := make(Array, 0)
+	matrix := make([]Array, 0)
 
 	fp, err := os.Open(p)
 	defer fp.Close()
@@ -36,7 +34,7 @@ func Svmlight(p string) (array.Array, []array.Array) {
 			label[linum] = -1.0
 		}
 
-		fv := make(array.Array, 100)
+		fv := make(Array, 100)
 		for i, feat := range vec[1:] {
 
 			t := strings.Split(feat, ":")

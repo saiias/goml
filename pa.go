@@ -1,29 +1,27 @@
-package classifier
+package goml
 
 import (
 	"math"
-
-	"github.com/saiias/goml/array"
 )
 
 type PA struct {
-	W      array.Array
-	Label  array.Array
-	Matrix []array.Array
+	W      Array
+	Label  Array
+	Matrix []Array
 	C      float64
 	Iters  int
 	Loss   string
 }
 
-func (p *PA) pa2(l float64, vec *array.Array) float64 {
+func (p *PA) pa2(l float64, vec *Array) float64 {
 	return l / (math.Pow(vec.Norm(), 2) + (1.0 / 2 * p.C))
 }
 
-func (p *PA) pa1(l float64, vec *array.Array) float64 {
+func (p *PA) pa1(l float64, vec *Array) float64 {
 	return math.Min(p.C, l/math.Pow(vec.Norm(), 2))
 }
 
-func (p *PA) Update(label float64, vec array.Array) {
+func (p *PA) Update(label float64, vec Array) {
 	pred := p.W.Dot(vec)
 	if pred*label <= 0 {
 		l := math.Max(0, 1-label*p.W.Dot(vec))
@@ -43,10 +41,9 @@ func (p *PA) Train() {
 			p.Update(p.Label[index], vec)
 		}
 	}
-
 }
 
-func (p *PA) Predict(test *[]array.Array) *[]float64 {
+func (p *PA) Predict(test *[]Array) *[]float64 {
 	ret := make([]float64, 0)
 	for _, a := range *test {
 		ret = append(ret, math.Sin(p.W.Dot(a)))

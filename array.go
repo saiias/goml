@@ -1,4 +1,4 @@
-package array
+package goml
 
 import (
 	"math"
